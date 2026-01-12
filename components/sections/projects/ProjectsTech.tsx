@@ -164,7 +164,7 @@ export default function ProjectsTech() {
     );
 }
 
-function StatBox({ label, value, color }) {
+function StatBox({ label, value, color }: { label: string; value: string | number; color: string }) {
     return (
         <div className="flex flex-col">
             <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 uppercase tracking-widest">{label}</span>
