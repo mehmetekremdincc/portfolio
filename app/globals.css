@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
+/* Tailwind v4 kullanıyorsan veya v3 config'de tanımlamak yerine burada yapabilirsin */
+@theme {
+  --color-primary: var(--primary);
+  --color-background: var(--background);
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #020617;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --primary: #2563eb;
+  --muted: #64748b;
+  --grid-color: rgba(0, 0, 0, 0.05);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark mod değişkenleri */
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card-bg: rgba(15, 23, 42, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --primary: #3b82f6;
+  --muted: #94a3b8;
+  --grid-color: rgba(59, 130, 246, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* --- KRİTİK DÜZELTME --- */
+body {
+  /* Arka planı doğrudan atamak yerine Tailwind'in kontrolüne bırakıyoruz */
+  @apply bg-[var(--background)] text-[var(--foreground)] transition-colors duration-700;
+  min-height: 100vh;
+}
+
+/* Senin özel smart-grid efektin */
+.smart-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black, transparent 90%);
+}
+
+/* --- ŞOV ANİMASYONLARI --- */
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s linear infinite;
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+/* Hero alanındaki başlık için ekstra parıltı (Opsiyonel) */
+.text-glow {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.dark .text-glow {
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
