@@ -11,12 +11,13 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 
 export default function UltimateCTA() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!containerRef.current) return;
+
     const rect = containerRef.current.getBoundingClientRect();
     setMousePos({
       x: e.clientX - rect.left,
