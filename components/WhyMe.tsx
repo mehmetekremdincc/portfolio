@@ -13,8 +13,7 @@ const reasons = [
         statDesc: "Daha Verimli",
         color: "bg-blue-600",
         gradient: "from-blue-600 to-sky-500",
-    }
-    ,
+    },
     {
         title: "Hız, Performans ve SEO Odaklı Geliştirme",
         desc: "Google Core Web Vitals kriterlerini merkeze alıyorum. Next.js ve modern frontend teknikleriyle hızlı açılan, SEO dostu ve kullanıcıyı sitede tutan deneyimler oluşturuyorum.",
@@ -23,8 +22,7 @@ const reasons = [
         statDesc: "Yükleme Süresi",
         color: "bg-purple-600",
         gradient: "from-purple-600 to-fuchsia-500",
-    }
-    ,
+    },
     {
         title: "Piksel Hassasiyetinde Arayüzler",
         desc: "Figma ve tasarım dosyalarını birebir, responsive yapıyı bozmadan koda aktarıyorum. Mikro animasyonlar, hover detayları ve kullanıcı etkileşimleriyle arayüzü yaşayan bir deneyime dönüştürüyorum.",
@@ -33,28 +31,27 @@ const reasons = [
         statDesc: "Detay Odaklı UI",
         color: "bg-emerald-600",
         gradient: "from-emerald-600 to-green-500",
-    }
-
+    },
 ];
 
 export default function WhyMe() {
-    const containerRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
-        const handleMouseMove = (e) => {
-            if (containerRef.current) {
-                const rect = containerRef.current.getBoundingClientRect();
-                setMousePosition({
-                    x: e.clientX - rect.left,
-                    y: e.clientY - rect.top,
-                });
-            }
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!containerRef.current) return;
+
+            const rect = containerRef.current.getBoundingClientRect();
+            setMousePosition({
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top,
+            });
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener("mousemove", handleMouseMove);
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener("mousemove", handleMouseMove);
         };
     }, []);
 
@@ -63,6 +60,8 @@ export default function WhyMe() {
             ref={containerRef}
             className="relative py-32 bg-[var(--background)] transition-colors duration-500 overflow-hidden"
         >
+            {/* geri kalan kod AYNEN */}
+
 
             {/* Arka Plan Dekoratif Elementler (Yavaş hareket eden renkli ışıklar) */}
             <div
