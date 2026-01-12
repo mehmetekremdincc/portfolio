@@ -82,7 +82,8 @@ export default function UltimateContact() {
                         <ContactRow
                             key={item.id}
                             item={item}
-                            onActive={(color) => setActiveColor(color)}
+                            // Tip tanımı 'color' isminin hemen yanında olmalı
+                            onActive={(color: string) => setActiveColor(color)}
                             onLeave={() => setActiveColor("var(--foreground)")}
                         />
                     ))}
